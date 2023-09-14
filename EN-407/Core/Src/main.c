@@ -22,6 +22,7 @@
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
+#include "pid.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -52,6 +53,9 @@
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 float R=0,G=0,B=0;
+pid_type_def motor[2];
+const static fp32 motor_speed_pid[3] = {MOTOR_SPEED_PID_KP, MOTOR_SPEED_PID_KI, MOTOR_SPEED_PID_KD};
+const static fp32 motor_angle_pid[3] = {MOTOR_ANGLE_PID_KP,MOTOR_ANGLE_PID_KI, MOTOR_ANGLE_PID_KD};
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -96,7 +100,13 @@ int main(void)
   MX_TIM6_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-	HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_1);
+	//两个电机初始化pid
+PID_init(&motor[0],PID_POSITION,motor_speed_pid,1000, 1000);
+PID_init(&motor[1],PID_POSITION,motor_speed_pid,1000, 1000);
+
+	
+	
+HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_1);
 HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_2);
 HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_1);
 HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_2);
@@ -105,6 +115,8 @@ HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_4);
 HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);
 		TIM1->CCR1=30;
      TIM1->CCR2=20;
+		 
+		 
   /* USER CODE END 2 */
 
   /* Infinite loop */

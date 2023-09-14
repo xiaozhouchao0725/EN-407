@@ -33,7 +33,7 @@ extern "C" {
 /* USER CODE BEGIN Includes */
 #include "Track.h"
 #include "motor.h"
-	#include "tsc2300.h"
+#include "tsc2300.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -99,7 +99,14 @@ void Error_Handler(void);
 #define kaishi1_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
+//ËÙ¶È»·pid
+#define MOTOR_SPEED_PID_KP 10.0f
+#define MOTOR_SPEED_PID_KI 0.1f
+#define MOTOR_SPEED_PID_KD 0.0f
 
+#define MOTOR_ANGLE_PID_KP 10.0f
+#define MOTOR_ANGLE_PID_KI 0.1f
+#define MOTOR_ANGLE_PID_KD 0.0f
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

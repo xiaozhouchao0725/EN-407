@@ -39,3 +39,5 @@ en_407\main.o: ../Core/Inc/dma.h
 en_407\main.o: ../Core/Inc/tim.h
 en_407\main.o: ../Core/Inc/usart.h
 en_407\main.o: ../Core/Inc/gpio.h
+en_407\main.o: ..\controller\pid.h
+en_407\main.o: ..\controller\struct_typedef.h
